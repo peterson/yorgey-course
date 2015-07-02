@@ -42,9 +42,9 @@ parseWarningMessage s =
 
 parseErrorMessage :: String -> LogMessage
 parseErrorMessage s =
-  LogMessage (Error (read errno)) (read tm) (unwords rst)
+  LogMessage (Error (read sev)) (read tm) (unwords rst)
   where
-    (errno:tm:rst) = words s
+    (sev:tm:rst) = words s
 
 --
 -- parse a whole log file
