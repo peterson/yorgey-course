@@ -108,7 +108,7 @@ whatWentWrong ms =
   message <$> sorted
   where
     important = filter isImportantErrorMessage ms
-    sorted = inOrder (build important)
+    sorted = inOrder $ build important
 
 -- Extracts the 'message' String from LogMessage
 message :: LogMessage -> String
