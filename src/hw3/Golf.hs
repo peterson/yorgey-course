@@ -1,5 +1,8 @@
 module Golf where
 
+import Data.List as L
+import Data.Map as M
+
 --
 --
 -- The stated goal in the homework is to write code that is 'as short as
@@ -30,7 +33,7 @@ module Golf where
 
 skips :: [a] -> [[a]]
 skips l =
-  [skip j l | j <- [1..(length l)]]
+  [skip n l | n <- [1..(length l)]]
   where
     skip n l = [l !! (k-1) | k <- [n..(length l)], (k `mod` n == 0)]
 
@@ -74,3 +77,27 @@ localMaxima l =
 
 histogram :: [Integer] -> String
 histogram = undefined
+
+--
+-- note: [Int] used as return type as length :: [a] -> Int
+
+hist :: [Integer] -> [Int]
+hist l =
+  [(look k mapped)| k <- [0..9]]
+  where
+    mapped   = fromList $ zip (head <$> grouped) (length <$> grouped)
+    grouped  = L.group $ L.sort l
+    look k m =
+      case (M.lookup k m) of
+        (Just v) -> v
+        Nothing  -> 0
+
+
+transpose :: [String] -> [String]
+transpose = undefined
+
+flatten :: [String] -> String
+flatten = undefined
+
+label :: [String]
+label = undefined
