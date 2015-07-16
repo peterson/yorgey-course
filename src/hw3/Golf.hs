@@ -60,14 +60,14 @@ localMaxima l =
 --
 -- Ex:
 --
--- histogram [1,1,1,5] ==
+-- putStr $ histogram [1,1,1,5]
 --  *
 --  *
 --  *   *
 -- ==========
 -- 0123456789
 --
--- histogram [1,4,5,4,6,6,3,4,2,4,9] ==
+-- putStr $ histogram [1,4,5,4,6,6,3,4,2,4,9]
 --     *
 --     *
 --     * *
@@ -76,7 +76,13 @@ localMaxima l =
 -- 0123456789
 
 histogram :: [Integer] -> String
-histogram = undefined
+histogram l =
+  unlines $ cols h ++ [line, nums]
+  where
+    h    = hist l
+    line = flat $ replicate 10 "="
+    nums = flat $ L.map show [0..9]
+    flat = L.intercalate ""
 
 --
 -- note: [Int] used as return type as length :: [a] -> Int
@@ -92,12 +98,16 @@ hist l =
         (Just v) -> v
         Nothing  -> 0
 
+cols :: [Int] -> [String]
+cols h = reverse $ L.transpose $ bars h
 
-transpose :: [String] -> [String]
-transpose = undefined
+bars :: [Int] -> [String]
+bars h = (pad maxh) . star <$> h
+  where
+    maxh = maximum h
+    star = flip replicate '*'
 
-flatten :: [String] -> String
-flatten = undefined
-
-label :: [String]
-label = undefined
+pad :: Int -> String -> String
+pad n s
+  | length s < n  = s ++ replicate (n - length s) ' '
+  | otherwise     = s
