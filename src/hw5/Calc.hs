@@ -65,3 +65,12 @@ instance Expr Mod7 where
   lit a = Mod7 (flip mod 7 a)
   (Mod7 a) `add` (Mod7 b) = Mod7 (flip mod 7 $ a + b)
   (Mod7 a) `mul` (Mod7 b) = Mod7 (flip mod 7 $ a * b)
+
+
+testExp :: Expr a => Maybe a
+testExp = parseExp lit add mul "(3 * -4) + 5"
+
+testInteger = testExp :: Maybe Integer
+testBool    = testExp :: Maybe Bool
+testMM      = testExp :: Maybe MinMax
+testMod7    = testExp :: Maybe Mod7
