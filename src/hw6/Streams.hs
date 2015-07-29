@@ -129,10 +129,13 @@ ruler = interleaveStreams as bs
 -- of the integer, which is provided in Data.Bits included in GHC base.
 --
 -- For any 2's complement binary representation, the operation "x & (~x+1)" will
--- return a value that represents the most significant bit (MSB) that was set in
+-- return a value that represents right-most bit that was was set in
 -- the binary representation of x.
 --
--- For more, see here: https://stackoverflow.com/questions/1551775
+-- See here: https://stackoverflow.com/questions/1551775
+--
+-- Or, for more detail, see specifically the section "Bit Hack #7" from here:
+-- http://www.catonmat.net/blog/low-level-bit-hacks-you-absolutely-must-know/
 --
 -- 1. Note that (~x+1) is the safe definition of ~x for a 2's complement binary
 -- representation.
