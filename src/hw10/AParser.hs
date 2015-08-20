@@ -208,6 +208,11 @@ choiceOf p1 p2 =
                           Nothing -> Nothing
                           Just (b, str'') -> Just (b, str'')
 
+
+--
+-- Ex 5
+--
+
 -- posInt_ parses an integer and throws it away
 posInt_ :: Parser ()
 posInt_ =
