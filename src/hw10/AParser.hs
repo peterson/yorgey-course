@@ -205,8 +205,9 @@ choiceOf p1 p2 =
     case runParser p1 str of
       Just (a, str') -> Just (a, str')
       Nothing        -> case runParser p2 str of
-                          Nothing -> Nothing
                           Just (b, str'') -> Just (b, str'')
+                          Nothing         -> Nothing
+
 
 
 --
