@@ -72,7 +72,17 @@ parseSExpr =
   spaces *> (atom <|> sexp) <* spaces
   where
     atom = liftA A parseAtom
-    sexp = liftA Comb $ char '(' *> oneOrMore parseSExpr <* char ')'
+    sexp = liftA Comb $ parseSExprList
+
+--
+-- Parse a list of s-expressions
+--
+parseSExprList :: Parser [SExpr]
+parseSExprList =
+  lpar *> oneOrMore parseSExpr <* rpar
+  where
+    lpar = char '('
+    rpar = char ')'
 
 --
 -- Parse atoms
