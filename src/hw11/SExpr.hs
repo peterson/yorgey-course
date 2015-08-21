@@ -69,16 +69,16 @@ data SExpr = A Atom
 --
 parseSExpr :: Parser SExpr
 parseSExpr =
-  spaces *> (atom <|> sexp) <* spaces
+  spaces *> (atom <|> list) <* spaces
   where
     atom = liftA A parseAtom
-    sexp = liftA Comb $ parseSExprList
+    list = liftA Comb $ parseList
 
 --
 -- Parse a list of s-expressions
 --
-parseSExprList :: Parser [SExpr]
-parseSExprList =
+parseList :: Parser [SExpr]
+parseList =
   lpar *> oneOrMore parseSExpr <* rpar
   where
     lpar = char '('
